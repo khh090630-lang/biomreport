@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>아스파라긴 & 아스파라기나아제</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+:root{--bg:#0b1220;--panel:#111a2e;--line:#22304d;--txt:#e6ecf5;--sub:#93a3bd;--teal:#2dd4bf;--amber:#fbbf24;--red:#f43f5e;--blue:#60a5fa;--violet:#a78bfa}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:#05080f;overflow:hidden;font-family:Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--txt)}
+#stage{width:1920px;height:1080px;position:absolute;left:50%;top:50%;transform-origin:center;background:radial-gradient(1200px 700px at 80% 10%,#13213d 0%,var(--bg) 60%)}
+.slide{position:absolute;inset:0;padding:70px 90px;display:none;flex-direction:column}
+.slide.active{display:flex;animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1}}
+.eyebrow{font-size:22px;letter-spacing:.18em;color:var(--teal);font-weight:700}
+h1{font-size:58px;font-weight:800;line-height:1.2;margin:10px 0 6px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--teal),var(--blue));-webkit-background-clip:text;color:transparent}
+.lead{font-size:24px;color:var(--sub)}
+.body{flex:1;display:flex;gap:50px;margin-top:36px;min-height:0}
+.col{display:flex;flex-direction:column;gap:22px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:20px;padding:24px 28px;position:relative}
+.card h3{font-size:27px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.num{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:20px;font-weight:800;background:rgba(45,212,191,.15);color:var(--teal);border:1px solid rgba(45,212,191,.4);flex:none}
+.card p,.card li{font-size:21px;line-height:1.6;color:#cdd6e4}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.card li{padding-left:20px;position:relative}
+.card li:before{content:"";position:absolute;left:2px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--teal)}
+b{color:#fff}.hl-a{color:var(--amber);font-weight:700}.hl-r{color:var(--red);font-weight:700}.hl-t{color:var(--teal);font-weight:700}.hl-b{color:var(--blue);font-weight:700}
+.eq{font-family:'JetBrains Mono',Consolas,monospace;font-size:19px;background:#0a1324;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:12px;color:#dbe7ff;text-align:center}
+.tag{display:inline-block;font-size:16px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub);margin-left:auto;font-weight:500}
+canvas{display:block}
+.molbox{flex:none;width:720px;display:flex;flex-direction:column;gap:16px}
+.molwrap{position:relative;flex:1;border-radius:24px;border:1px solid var(--line);background:radial-gradient(circle at 50% 45%,#16274a,#0a1120 70%);overflow:hidden}
+.legend{display:flex;gap:20px;font-size:18px;color:var(--sub);justify-content:center}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+.hint{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:16px;color:#6b7c99}
+.simwrap{flex:none;width:1120px;display:flex;flex-direction:column;gap:16px}
+.simcanvas{border-radius:24px;border:1px solid var(--line);background:#0a1120}
+.controls{display:flex;align-items:center;gap:24px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px 26px}
+.controls label{font-size:20px;font-weight:700;white-space:nowrap}
+input[type=range]{flex:1;-webkit-appearance:none;height:10px;border-radius:5px;background:linear-gradient(90deg,var(--violet) var(--p,0%),#26324d var(--p,0%));outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;border:5px solid var(--violet);cursor:pointer;box-shadow:0 0 18px rgba(167,139,250,.7)}
+.dose{font-size:26px;font-weight:800;color:var(--violet);width:200px;text-align:right}
+button{font-family:inherit;font-size:18px;padding:10px 18px;border-radius:12px;border:1px solid var(--line);background:#1a2540;color:var(--txt);cursor:pointer}
+button:hover{background:#24335a}
+.meters{display:grid;grid-template-columns:1fr 1fr 1fr 1.3fr;gap:16px}
+.meter{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+.meter .k{font-size:16px;color:var(--sub)}.meter .v{font-size:28px;font-weight:800;margin-top:2px}
+.bar{height:8px;border-radius:4px;background:#1f2a44;margin-top:8px;overflow:hidden}.bar>div{height:100%;transition:width .2s}
+.nav{position:absolute;bottom:26px;right:40px;display:flex;align-items:center;gap:14px;font-size:18px;color:var(--sub);z-index:5}
+.foot{position:absolute;bottom:30px;left:90px;font-size:15px;color:#55657f}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- ============ SLIDE 1 ============ -->
+<section class="slide active">
+  <div class="eyebrow">PART 1 · 단백질을 완성하는 아미노산</div>
+  <h1>아스파라긴: 생명 유지와 <em>단백질 완성의 핵심 퍼즐</em></h1>
+  <div class="lead">Asparagine (Asn, N) · C₄H₈N₂O₃ · 극성·비전하 측쇄를 가진 표준 아미노산</div>
+  <div class="body">
+    <div class="col" style="flex:1">
+      <div class="card">
+        <h3><span class="num">1</span>아스파라긴의 정체</h3>
+        <ul>
+          <li>단백질을 조립하는 <b>20가지 표준 아미노산</b> 중 하나</li>
+          <li>측쇄 끝에 <span class="hl-a">아미드기(–CONH₂)</span>를 가진 극성 아미노산 — 물·다른 분자와 잘 상호작용</li>
+          <li>체내 합성이 가능한 <b>비필수 아미노산</b> → 대부분의 세포는 스스로 만들어 씀</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="num">2</span>아스파라긴의 생성 — 세포 내 자급자족</h3>
+        <ul>
+          <li>세포질의 <span class="hl-t">아스파라긴 합성효소(ASNS)</span>가 ‘생산 공장’ 역할</li>
+          <li>아스파르트산에 글루타민의 아미드 질소를 옮겨 붙여 합성 (ATP 소모)</li>
+        </ul>
+        <div class="eq">아스파르트산 + 글루타민 + ATP &nbsp;<span class="hl-t">—ASNS→</span>&nbsp; 아스파라긴 + 글루탐산 + AMP + PPi</div>
+      </div>
+      <div class="card">
+        <h3><span class="num">3</span>핵심 역할 — 화학적 기전</h3>
+        <ul>
+          <li><b>3D 구조 형성:</b> 아미드기의 C=O(수소결합 수용체)와 N–H(공여체)가 동시에 수소결합을 만들어 단백질이 올바른 <b>3차원 구조(Folding)</b>로 접히도록 고정</li>
+          <li><b>N-당화의 유일한 표적:</b> <span class="hl-a">Asn–X–Ser/Thr</span> 서열의 Asn 아미드 질소에만 ‘당 꼬리표’가 붙음 (N-linked Glycosylation) → 단백질의 접힘 품질관리·면역·신호전달에 필수</li>
+        </ul>
+      </div>
+    </div>
+    <div class="molbox">
+      <div class="molwrap"><canvas id="mol" width="720" height="640"></canvas><div class="hint">드래그하여 회전 · 아스파라긴 3D 분자 모형 (ball-and-stick)</div></div>
+      <div class="legend"><span><i style="background:#9aa4b2"></i>C</span><span><i style="background:#ef4444"></i>O</span><span><i style="background:#3b82f6"></i>N</span><span><i style="background:#f1f5f9"></i>H</span><span><i style="background:transparent;border:2px dashed var(--amber)"></i>아미드기(측쇄)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 ============ -->
+<section class="slide">
+  <div class="eyebrow">PART 2 · 대사 취약성을 노리는 표적 치료</div>
+  <h1>보급로 원천 차단: <em>아스파라기나아제의 표적 치료 기전</em></h1>
+  <div class="body" style="margin-top:28px">
+    <div class="simwrap">
+      <canvas id="sim" class="simcanvas" width="1120" height="560"></canvas>
+      <div class="controls">
+        <label>💉 혈청 효소 활성</label>
+        <input id="dose" type="range" min="0" max="1000" step="10" value="0">
+        <div class="dose" id="doseV">0</div>
+        <select id="mode" style="font-family:inherit;font-size:17px;padding:9px;border-radius:12px;background:#1a2540;color:#e6ecf5;border:1px solid #22304d">
+          <option value="const">일정 유지</option><option value="peg">PEG형 (t½≈5.7일)</option><option value="erw">Erwinia형 (t½≈15.6h)</option></select>
+        <button id="inject" style="display:none;background:#5b21b6">💉 투여</button>
+        <button id="reset">↺ 초기화</button>
+      </div>
+      <div class="meters">
+        <div class="meter"><div class="k">혈중 아스파라긴 농도</div><div class="v" id="mAsn">100%</div><div class="bar"><div id="bAsn" style="background:var(--amber);width:100%"></div></div></div>
+        <div class="meter"><div class="k">백혈병 세포 ER 스트레스</div><div class="v" id="mEr">0%</div><div class="bar" style="position:relative"><div id="bEr" style="background:var(--red);width:0%"></div><i style="position:absolute;left:50%;top:-4px;width:2px;height:16px;background:#fff"></i></div></div>
+        <div class="meter"><div class="k">투여 후 경과(실제 시간)</div><div class="v" id="mT">0 h</div><div class="k" style="margin-top:6px;font-size:14px">화면 1초 = 2시간 · 현재 활성 <b id="mA" style="color:#a78bfa">0 mIU/mL</b></div></div>
+        <div class="meter"><div class="k">세포 상태</div><div class="v" id="mState" style="font-size:22px;padding-top:6px">두 세포 모두 정상 증식</div></div>
+      </div>
+    </div>
+    <div class="col" style="flex:1">
+      <div class="card">
+        <h3><span class="num">1</span>종양 세포의 대사적 결함</h3>
+        <p>급성 림프모구 백혈병(ALL) 세포는 <span class="hl-r">ASNS 발현이 매우 낮아</span> 스스로 충분히 만들지 못함 → <b>혈중 아스파라긴 공급에 의존</b>해야만 증식 가능</p>
+      </div>
+      <div class="card">
+        <h3><span class="num">2</span>효소의 가수분해 작용</h3>
+        <p>투여된 <span class="hl-b">아스파라기나아제(4량체)</span>가 혈중 아스파라긴의 아미드기에 물을 더해 분해</p>
+        <div class="eq">Asn + H₂O <span class="hl-b">—아스파라기나아제→</span> Asp + NH₃</div>
+      </div>
+      <div class="card">
+        <h3><span class="num">3</span>표적 사멸 — 세포사멸 유도</h3>
+        <ul>
+          <li>아스파라긴 고갈 → 단백질 합성 정지, 잘못 접히고 <b>당 꼬리표 없는 불량 단백질</b> 축적</li>
+          <li>소포체 스트레스(ER Stress)·UPR 누적 → <span class="hl-r">Apoptosis</span></li>
+          <li>ASNS를 가동하는 <span class="hl-t">정상 세포는 생존</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ SLIDE 3 ============ -->
+<section class="slide">
+  <div class="eyebrow">APPENDIX · 시뮬레이션 모델의 과학적 근거</div>
+  <h1>시뮬레이션 <em>파라미터와 출처</em></h1>
+  <div class="lead">화면 1초 = 실제 2시간. 아래 수치는 문헌 값이고, 그 사이 값은 모델링을 위한 보간·가정(†)입니다.</div>
+  <div class="body" style="gap:40px">
+    <div class="col" style="flex:1.15">
+      <div class="card" style="padding:18px 24px"><table style="width:100%;border-collapse:collapse;font-size:18px;line-height:1.45">
+        <tr style="color:var(--teal);text-align:left"><th style="padding:6px">항목</th><th>모델 값</th><th>근거</th></tr>
+        <tr><td style="padding:6px">기저 혈중 Asn</td><td>50 µM</td><td>정상 범위 40–80 µM [4]</td></tr>
+        <tr><td style="padding:6px">완전 고갈 기준</td><td>≥100 mIU/mL</td><td>국제 표준 역치 [1][2]</td></tr>
+        <tr><td style="padding:6px">반등 시작</td><td>&lt;400 mIU/mL</td><td>AALL07P4 약력학 [3]</td></tr>
+        <tr><td style="padding:6px">고갈 속도</td><td>τ≈2h (수 시간 내)</td><td>투여 후 급격히 정량한계 이하로 감소 [3][5] †τ값</td></tr>
+        <tr><td style="padding:6px">정상 세포 ASNS 유도</td><td>τ≈8h</td><td>ATF4 30분 내 개시, 4–24h 전사 단계 [6]</td></tr>
+        <tr><td style="padding:6px">사멸 결정 시점</td><td>완전 고갈 후 ~18h</td><td>12h 처리 후 Annexin V 양성 증가 [7] †</td></tr>
+        <tr><td style="padding:6px">세포 붕괴</td><td>~36h</td><td>in vitro 세포독성 24–72h 평가 [8] †</td></tr>
+        <tr><td style="padding:6px">ER 스트레스 지수</td><td>0–1 (결정점 0.5)</td><td>† 개념 지표 (실측 단위 없음)</td></tr>
+      </table></div>
+      <div class="card" style="padding:16px 24px"><p style="font-size:17px">⏳ 반감기 모드: ‘💉 투여’ 시 슬라이더 값을 최고 활성으로 더하고, A(t)=A₀·e<sup>−ln2·t/t½</sup>로 1차 소실 (PEG형 t½≈5.7일, Erwinia형 ≈15.6h [1]). 흡수 지연·항체에 의한 불활성화(silent inactivation)는 미반영. ‘일정 유지’ 모드는 활성 고정 가정. 실제 사멸에는 병용 항암제·글루타민 분해 등 다른 요인도 관여함.</p></div>
+    </div>
+    <div class="col" style="flex:1">
+      <div class="card" style="padding:18px 24px"><h3 style="font-size:22px">참고문헌</h3>
+      <ol style="font-size:15.5px;line-height:1.5;color:#cdd6e4;padding-left:22px;display:flex;flex-direction:column;gap:7px">
+        <li>Asselin B, Rizzari C. Asparaginase pharmacokinetics and implications of therapeutic drug monitoring. <i>Leuk Lymphoma</i> 2015. PMC4732456</li>
+        <li>ANZCHOG. Serum asparaginase activity monitoring in children and adolescents (Guideline), 2024.</li>
+        <li>Angiolillo AL et al. PK/PD of calaspargase pegol in ALL: COG AALL07P4. <i>J Clin Oncol</i> 2014. PMC4239306</li>
+        <li>Tong WH. 박사학위논문, Erasmus University Rotterdam (repub.eur.nl/pub/51370).</li>
+        <li>Maese L et al. Recombinant Erwinia asparaginase (JZP458) in ALL: AALL1931. <i>Blood</i> 2023. PMC10651770</li>
+        <li>Richards NGJ, Kilberg MS. Asparagine synthetase chemotherapy. <i>Annu Rev Biochem</i> 2006;75:629–654.</li>
+        <li>Requirement for ER–mitochondria Ca²⁺ transfer, ROS production and mPTP formation in L-asparaginase-induced apoptosis of ALL cells. <i>Front Cell Dev Biol</i> 2023;11:1124164.</li>
+        <li>Hermanova I et al. Low expression of asparagine synthetase in lymphoid blasts… <i>Exp Hematol</i> 2012.</li>
+      </ol></div>
+    </div>
+  </div>
+</section>
+
+<div class="foot">← → 키 또는 버튼으로 이동</div>
+<div class="nav"><button id="prev">◀</button><span id="pg">1 / 3</span><button id="next">▶</button></div>
+</div>
+
+<script>
+/* ---------- scaling & nav ---------- */
+const stage=document.getElementById('stage');
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(-50%,-50%) scale(${s})`}
+addEventListener('resize',fit);fit();
+const slides=[...document.querySelectorAll('.slide')];let cur=0;
+function go(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,k)=>s.classList.toggle('active',k===cur));document.getElementById('pg').textContent=`${cur+1} / ${slides.length}`}
+document.getElementById('prev').onclick=()=>go(cur-1);document.getElementById('next').onclick=()=>go(cur+1);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1)});
+
+/* ---------- Slide 1: 3D molecule ---------- */
+const COL={C:'#9aa4b2',O:'#ef4444',N:'#3b82f6',H:'#f1f5f9'},RAD={C:.38,O:.36,N:.36,H:.22};
+const A=[ // [element,x,y,z,isAmide]
+['N',-1.25,1.0,0.25,0],['C',0,0.1,0,0],['C',1.3,0.85,-0.1,0],['O',1.35,2.05,0.2,0],['O',2.35,0.1,-0.45,0],
+['C',-0.05,-1.35,0.5,0],['C',1.15,-2.2,0.1,1],['O',2.2,-1.8,-0.45,1],['N',0.95,-3.5,0.45,1],
+['H',0.05,0.05,-1.1,0],['H',-1.25,1.9,-0.25,0],['H',-2.05,0.45,0.0,0],['H',-0.95,-1.85,0.15,0],['H',-0.1,-1.35,1.6,0],
+['H',1.7,-4.15,0.15,1],['H',0.1,-3.9,0.95,1],['H',3.15,0.6,-0.5,0]];
+const B=[[0,1],[1,2],[2,3,2],[2,4],[1,5],[5,6],[6,7,2],[6,8],[1,9],[0,10],[0,11],[5,12],[5,13],[8,14],[8,15],[4,16]];
+const mc=document.getElementById('mol'),mx=mc.getContext('2d');
+let ry=0.6,rx=-0.25,drag=null,auto=true;
+mc.onmousedown=e=>{drag=[e.clientX,e.clientY];auto=false};
+addEventListener('mouseup',()=>{drag=null;setTimeout(()=>auto=true,2500)});
+addEventListener('mousemove',e=>{if(!drag)return;ry+=(e.clientX-drag[0])*.01;rx+=(e.clientY-drag[1])*.01;drag=[e.clientX,e.clientY]});
+const cx0=-.0,cy0=-1.0;
+function proj(a){let x=a[1]-cx0,y=a[2]-cy0,z=a[3];let x1=x*Math.cos(ry)+z*Math.sin(ry),z1=-x*Math.sin(ry)+z*Math.cos(ry);
+let y1=y*Math.cos(rx)-z1*Math.sin(rx),z2=y*Math.sin(rx)+z1*Math.cos(rx);const f=6/(6+z2),S=92;return{x:300+x1*S*f,y:320-y1*S*f,z:z2,f}}
+function drawMol(t){
+ if(auto)ry+=.006;
+ mx.clearRect(0,0,720,640);const P=A.map(proj);
+ // amide halo
+ const am=P.filter((p,i)=>A[i][4]);let ax=0,ay=0;am.forEach(p=>{ax+=p.x;ay+=p.y});ax/=am.length;ay/=am.length;
+ const pulse=.5+.5*Math.sin(t/400);
+ const g=mx.createRadialGradient(ax,ay,10,ax,ay,130);g.addColorStop(0,`rgba(251,191,36,${.18+.12*pulse})`);g.addColorStop(1,'rgba(251,191,36,0)');
+ mx.fillStyle=g;mx.beginPath();mx.arc(ax,ay,130,0,7);mx.fill();
+ mx.setLineDash([8,7]);mx.strokeStyle='rgba(251,191,36,.8)';mx.lineWidth=2;mx.beginPath();mx.arc(ax,ay,100,0,7);mx.stroke();mx.setLineDash([]);
+ // bonds sorted
+ const items=[];B.forEach(b=>items.push({z:(P[b[0]].z+P[b[1]].z)/2,b}));A.forEach((a,i)=>items.push({z:P[i].z-.01,i}));
+ items.sort((p,q)=>q.z-p.z);
+ items.forEach(it=>{
+  if(it.b){const[p,q]=[P[it.b[0]],P[it.b[1]]];const dbl=it.b[2]===2;const dx=q.y-p.y,dy=p.x-q.x,l=Math.hypot(dx,dy)||1;
+   const offs=dbl?[-5,5]:[0];offs.forEach(o=>{mx.strokeStyle='#5b6b86';mx.lineWidth=7*p.f;mx.lineCap='round';mx.beginPath();
+   mx.moveTo(p.x+dx/l*o,p.y+dy/l*o);mx.lineTo(q.x+dx/l*o,q.y+dy/l*o);mx.stroke();mx.strokeStyle='#8a9ab5';mx.lineWidth=3*p.f;mx.stroke()})}
+  else{const a=A[it.i],p=P[it.i],r=RAD[a[0]]*70*p.f;const gr=mx.createRadialGradient(p.x-r*.35,p.y-r*.35,r*.1,p.x,p.y,r);
+   gr.addColorStop(0,'#fff');gr.addColorStop(.25,COL[a[0]]);gr.addColorStop(1,'#0b1220');mx.fillStyle=gr;mx.beginPath();mx.arc(p.x,p.y,r,0,7);mx.fill();
+   if(a[0]!=='H'){mx.fillStyle='rgba(255,255,255,.85)';mx.font=`700 ${Math.round(15*p.f)}px Pretendard`;mx.textAlign='center';mx.textBaseline='middle';mx.fillText(a[0],p.x,p.y)}}
+ });
+ // callout leader line
+ const lx=600,ly=520;mx.strokeStyle='#fbbf24';mx.lineWidth=2;mx.beginPath();mx.moveTo(ax+70,ay+70);mx.lineTo(lx-130,ly);mx.lineTo(lx+90,ly);mx.stroke();
+ mx.fillStyle='#fbbf24';mx.beginPath();mx.arc(ax+70,ay+70,5,0,7);mx.fill();
+ mx.textAlign='left';mx.textBaseline='alphabetic';mx.font='800 22px Pretendard';mx.fillText('① 아미드기 –CONH₂',lx-128,ly-34);
+ mx.fillStyle='#cdd6e4';mx.font='16px Pretendard';mx.fillText('수소결합 · N-당화 부착 부위',lx-128,ly-10);
+ // backbone label
+ const ca=P[1];mx.fillStyle='#93a3bd';mx.font='600 16px Pretendard';mx.fillText('Cα (주쇄)',ca.x+24,ca.y-22);
+}
+
+/* ---------- Slide 2: simulation ---------- */
+const sc=document.getElementById('sim'),sx=sc.getContext('2d'),W=1120,H=560;
+const NC={x:175,y:280,r:140},LC={x:945,y:280,r:140},BL={x0:340,x1:780};
+let asn,enz,prod,stress,dead,frags,flows,t0;
+const dose=document.getElementById('dose');
+function rnd(a,b){return a+Math.random()*(b-a)}
+let L_=1,S_=0,COMMIT=0.5,commitH=null,deathH=null;
+let simH=0,started=false,lastT=null,asnsInd=0;
+let curA=0,mode='const',Acur=0;const HALF={peg:137,erw:15.6};
+function reset(){Acur=0;L_=1;S_=0;commitH=null;deathH=null;simH=0;started=false;asnsInd=0;asn=[];for(let i=0;i<70;i++)asn.push(newAsn());enz=[];prod=[];stress=0;dead=0;frags=[];flows=[];}
+function newAsn(x){return{x:x??rnd(BL.x0+15,BL.x1-15),y:rnd(40,H-40),vx:rnd(-.6,.6),vy:rnd(-.6,.6)}}
+reset();document.getElementById('reset').onclick=()=>{reset();dose.value=0;updDose()};
+function updDose(){dose.style.setProperty('--p',dose.value/10+'%');document.getElementById('doseV').innerHTML=dose.value+'<span style="font-size:16px"> mIU/mL</span>'}
+dose.oninput=updDose;updDose();
+const modeSel=document.getElementById('mode'),injBtn=document.getElementById('inject'),lbl=document.querySelector('.controls label');
+modeSel.onchange=()=>{mode=modeSel.value;reset();injBtn.style.display=mode==='const'?'none':'inline-block';
+ lbl.textContent=mode==='const'?'💉 혈청 효소 활성':'💉 투여 직후 최고 활성';};
+injBtn.onclick=()=>{Acur+=+dose.value;started=true;};
+function wander(o,sp){o.vx+=rnd(-.15,.15);o.vy+=rnd(-.15,.15);const v=Math.hypot(o.vx,o.vy);if(v>sp){o.vx*=sp/v;o.vy*=sp/v}
+ o.x+=o.vx;o.y+=o.vy;if(o.x<BL.x0+10||o.x>BL.x1-10)o.vx*=-1;if(o.y<20||o.y>H-20)o.vy*=-1;o.x=Math.max(BL.x0+10,Math.min(BL.x1-10,o.x));o.y=Math.max(20,Math.min(H-20,o.y))}
+function gear(x,y,r,a,col){sx.save();sx.translate(x,y);sx.rotate(a);sx.fillStyle=col;sx.beginPath();
+ for(let i=0;i<10;i++){const a1=i/10*Math.PI*2;sx.lineTo(Math.cos(a1-.12)*r*1.3,Math.sin(a1-.12)*r*1.3);sx.lineTo(Math.cos(a1+.12)*r*1.3,Math.sin(a1+.12)*r*1.3);sx.lineTo(Math.cos(a1+.31)*r,Math.sin(a1+.31)*r);sx.lineTo(Math.cos(a1+.5)*r,Math.sin(a1+.5)*r)}
+ sx.fill();sx.fillStyle='#0a1120';sx.beginPath();sx.arc(0,0,r*.4,0,7);sx.fill();sx.restore()}
+function folded(x,y,s,c){sx.strokeStyle=c;sx.lineWidth=3;sx.beginPath();for(let k=0;k<=20;k++){const a=k/20*Math.PI*4;sx.lineTo(x+Math.cos(a)*s*(.5+k/40),y+Math.sin(a)*s*(.5+k/40))}sx.stroke()}
+function misfold(x,y,s,t){sx.strokeStyle='#f43f5e';sx.lineWidth=3;sx.beginPath();for(let k=0;k<8;k++)sx.lineTo(x-s+k*s/3.5,y+Math.sin(k*1.9+t/300)*s*.6);sx.stroke()}
+const seed=[...Array(30)].map(()=>[rnd(0,6.28),rnd(.15,.72)]);
+function cellBody(c,col,glow){const g=sx.createRadialGradient(c.x-30,c.y-30,20,c.x,c.y,c.r);g.addColorStop(0,col[0]);g.addColorStop(1,col[1]);
+ sx.shadowColor=glow;sx.shadowBlur=30;sx.fillStyle=g;sx.beginPath();sx.arc(c.x,c.y,c.r,0,7);sx.fill();sx.shadowBlur=0;sx.strokeStyle=glow;sx.lineWidth=3;sx.stroke()}
+function mix(a,b,t){return a.map((v,i)=>Math.round(v+(b[i]-v)*t))}
+/* ===== 근거 기반 모델 (출처는 슬라이드 3) =====
+ 시간 축척: 화면 1초 = 실제 2시간
+ A  : 혈청 아스파라기나아제 활성 (mIU/mL)
+ L  : 혈중 Asn (기저치 대비 비율, 기저 ≈50 µM; 정상 40–80 µM)
+ S  : 백혈병 세포 ER/아미노산 스트레스 지수 (0–1, 모델 구성값)  */
+const HPS=2;                 // hours per second
+const BASE_UM=50;
+function targetAsn(A){       // 활성-고갈 관계: ≥100 mIU/mL 완전 고갈(국제 기준), <400에서 반등 시작(AALL07P4)
+ if(A<=0)return 1;
+ if(A<100)return 1-0.97*Math.pow(A/100,0.6);
+ if(A<400)return 0.03*(400-A)/300;
+ return 0;}
+function stepSim(t){
+ const dtH=lastT==null?0:Math.min(.1,(t-lastT)/1000)*HPS;lastT=t;
+ let A;
+ if(mode==='const')A=+dose.value;
+ else{Acur*=Math.exp(-Math.LN2*dtH/HALF[mode]);if(Acur<1)Acur=0;A=Acur;}
+ curA=A;
+ if(A>0)started=true; if(started)simH+=dtH;
+ // 혈중 Asn: 투여 후 수 시간 내 급감(τ≈2h), 효소 감소 시 반등(τ≈6h)
+ const tg=targetAsn(A),tau=tg<L_?2:6; L_+=(tg-L_)*(1-Math.exp(-dtH/tau));
+ // 정상 세포 ASNS 유도: GCN2–ATF4 경로, 30분 내 개시·4–24h에 걸쳐 증가(τ≈8h)
+ const indT=Math.max(0,1-L_/0.5); asnsInd+=(indT-asnsInd)*(1-Math.exp(-dtH/8));
+ // 효소/입자 시각화
+ const nE=Math.round(Math.sqrt(A/1000)*14);
+ while(enz.length<nE)enz.push({x:rnd(BL.x0+20,BL.x1-20),y:rnd(40,H-40),vx:0,vy:0,a:rnd(0,6)});
+ while(enz.length>nE)enz.pop();
+ const want=Math.round(L_*70);
+ if(asn.length<want&&Math.random()<.3)asn.push(newAsn(Math.random()<.5?BL.x0+15:BL.x1-15));
+ asn.forEach(o=>wander(o,.9));enz.forEach(e=>{wander(e,1.6);e.a+=.03});
+ if(asn.length>want){let hit=false;
+  for(const e of enz){for(let i=asn.length-1;i>=0;i--){const o=asn[i];if(Math.hypot(o.x-e.x,o.y-e.y)<40){split(i);hit=true;break}}if(asn.length<=want)break}
+  if(!hit&&asn.length>want+3&&enz.length)split(Math.floor(Math.random()*asn.length));}
+ prod.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.life-=.012});prod=prod.filter(p=>p.life>0);
+ const L=L_;
+ if(Math.random()<L*.35&&!dead)flows.push({to:LC,p:0});
+ if(Math.random()<L*.25)flows.push({to:NC,p:0});
+ flows.forEach(f=>f.p+=.02);flows=flows.filter(f=>f.p<1);
+ // ER 스트레스: Asn < 기저 25%에서 누적. 완전 고갈 시 ~18h에 사멸 결정(Annexin V 양성 12h~, ATF4/CHOP 2단계 4–24h),
+ // 결정 후 비가역 진행 → ~36h 붕괴 (in vitro 세포독성은 24–72h에 걸쳐 측정)
+ if(!dead){const D=Math.max(0,Math.min(1,(0.25-L)/0.25));
+  if(S_>=COMMIT)stress+=dtH/36;
+  else if(D>0)stress+=D*dtH/36;
+  else stress-=dtH/24;
+  stress=Math.max(0,Math.min(1,stress));S_=stress;
+  if(stress>=COMMIT&&deathH==null)commitH=commitH??simH;
+  if(stress>=1){dead=1;deathH=simH;for(let i=0;i<26;i++){const a=rnd(0,6.28);frags.push({x:LC.x+Math.cos(a)*rnd(20,110),y:LC.y+Math.sin(a)*rnd(20,110),vx:Math.cos(a)*rnd(.3,1.4),vy:Math.sin(a)*rnd(.3,1.4),r:rnd(10,26),life:1})}}}
+ else frags.forEach(f=>{f.x+=f.vx;f.y+=f.vy;f.vx*=.99;f.vy*=.99;f.life=Math.max(.25,f.life-.002)});
+ return L;
+}
+function split(i){const o=asn[i];asn.splice(i,1);
+ prod.push({x:o.x,y:o.y,vx:rnd(-1.5,-.3),vy:rnd(-1,1),k:'Asp',life:1},{x:o.x,y:o.y,vx:rnd(.3,1.5),vy:rnd(-1,1),k:'NH₃',life:1})}
+function drawSim(t){
+ const L=stepSim(t);sx.clearRect(0,0,W,H);
+ // blood vessel
+ const bg=sx.createLinearGradient(BL.x0,0,BL.x1,0);bg.addColorStop(0,'rgba(127,29,29,.0)');bg.addColorStop(.12,'rgba(127,29,29,.28)');bg.addColorStop(.88,'rgba(127,29,29,.28)');bg.addColorStop(1,'rgba(127,29,29,0)');
+ sx.fillStyle=bg;sx.fillRect(BL.x0,0,BL.x1-BL.x0,H);
+ sx.fillStyle='#fca5a5';sx.font='700 18px Pretendard';sx.textAlign='center';sx.fillText('혈류 (Bloodstream)',(BL.x0+BL.x1)/2,30);
+ // flows
+ flows.forEach(f=>{const sx0=(BL.x0+BL.x1)/2,x=sx0+(f.to.x-sx0)*f.p,y=f.to.y+Math.sin(f.p*9)*20;sx.fillStyle='rgba(251,191,36,.7)';sx.beginPath();sx.arc(x,y,5,0,7);sx.fill()});
+ // asn
+ asn.forEach(o=>{sx.fillStyle='#fbbf24';sx.shadowColor='#fbbf24';sx.shadowBlur=8;sx.beginPath();sx.arc(o.x,o.y,7,0,7);sx.fill();sx.shadowBlur=0});
+ // products
+ prod.forEach(p=>{sx.globalAlpha=p.life;sx.fillStyle=p.k==='Asp'?'#60a5fa':'#a3e635';sx.beginPath();sx.arc(p.x,p.y,5,0,7);sx.fill();sx.font='600 12px Pretendard';sx.fillText(p.k,p.x,p.y-9);sx.globalAlpha=1});
+ // enzymes (tetramer)
+ enz.forEach(e=>{sx.save();sx.translate(e.x,e.y);sx.rotate(e.a);sx.shadowColor='#a78bfa';sx.shadowBlur=14;
+  [[-8,-8],[8,-8],[-8,8],[8,8]].forEach(([a,b],i)=>{sx.fillStyle=i%2?'#8b5cf6':'#c4b5fd';sx.beginPath();sx.arc(a,b,9,0,7);sx.fill()});sx.restore();sx.shadowBlur=0});
+ // normal cell
+ cellBody(NC,['#134e4a','#0b2e2c'],'#2dd4bf');
+ sx.fillStyle='rgba(45,212,191,.12)';sx.beginPath();sx.ellipse(NC.x+40,NC.y+45,42,32,0,0,7);sx.fill();
+ gear(NC.x-30,NC.y-25,26,t/1000*(1+4*asnsInd),'#2dd4bf');
+ sx.fillStyle='#ccfbf1';sx.font='800 15px Pretendard';sx.fillText('ASNS',NC.x-30,NC.y+30);
+ for(let i=0;i<7;i++){const[a,r]=seed[i];folded(NC.x+Math.cos(a)*r*NC.r+20,NC.y+Math.sin(a)*r*NC.r,9,'#5eead4')}
+ // internal produced asn
+ for(let i=0;i<5;i++){const a=t/700+i*1.25;sx.fillStyle='#fbbf24';sx.beginPath();sx.arc(NC.x-30+Math.cos(a)*55,NC.y-25+Math.sin(a)*55,5,0,7);sx.fill()}
+ sx.fillStyle='#5eead4';sx.font='800 22px Pretendard';sx.fillText('정상 세포',NC.x,NC.y+NC.r+36);
+ sx.fillStyle='#93a3bd';sx.font='15px Pretendard';sx.fillText(asnsInd>.3?'ATF4→ASNS 유도↑ · 자체 생산으로 생존':'ASNS로 자급자족',NC.x,NC.y+NC.r+58);
+ // leukemia cell
+ if(!dead){const c=mix([30,58,138],[159,18,57],stress),c2=mix([15,23,42],[76,5,25],stress);
+  const sh=stress>.7?rnd(-1,1)*stress*4:0;const C={x:LC.x+sh,y:LC.y,r:LC.r};
+  cellBody(C,[`rgb(${c})`,`rgb(${c2})`],stress>.5?'#f43f5e':'#60a5fa');
+  // broken ASNS gear
+  gear(C.x-35,C.y-30,22,0,'#475569');sx.strokeStyle='#f43f5e';sx.lineWidth=4;sx.beginPath();sx.moveTo(C.x-60,C.y-55);sx.lineTo(C.x-10,C.y-5);sx.stroke();
+  sx.fillStyle='#94a3b8';sx.font='800 13px Pretendard';sx.fillText('ASNS ✕',C.x-35,C.y+12);
+  // ER
+  sx.strokeStyle=`rgba(244,63,94,${.3+stress*.6})`;sx.lineWidth=3;for(let k=0;k<3;k++){sx.beginPath();sx.arc(C.x+30,C.y+35,26+k*12,3.6,5.8);sx.stroke()}
+  const nGood=Math.round((1-stress)*7),nBad=Math.round(stress*16);
+  for(let i=0;i<nGood;i++){const[a,r]=seed[i+8];folded(C.x+Math.cos(a)*r*C.r+15,C.y+Math.sin(a)*r*C.r,9,'#93c5fd')}
+  for(let i=0;i<nBad;i++){const[a,r]=seed[i+12];misfold(C.x+Math.cos(a)*r*C.r,C.y+Math.sin(a)*r*C.r,11,t+i*90)}
+  if(stress>.6){sx.fillStyle=`rgba(244,63,94,${(stress-.6)*2})`;sx.font='800 18px Pretendard';sx.fillText('ER STRESS',C.x+30,C.y-C.r+40)}
+ } else {
+  frags.forEach(f=>{sx.globalAlpha=f.life;sx.fillStyle='#9f1239';sx.strokeStyle='#f43f5e';sx.lineWidth=2;sx.beginPath();sx.arc(f.x,f.y,f.r,0,7);sx.fill();sx.stroke()});sx.globalAlpha=1;
+  sx.fillStyle='#f43f5e';sx.font='900 30px Pretendard';sx.fillText('APOPTOSIS',LC.x,LC.y+10);
+ }
+ sx.fillStyle=dead?'#f43f5e':'#93c5fd';sx.font='800 22px Pretendard';sx.fillText('백혈병(ALL) 세포',LC.x,LC.y+LC.r+36);
+ sx.fillStyle='#93a3bd';sx.font='15px Pretendard';sx.fillText(dead?'세포사멸 완료':stress>.2?'불량 단백질 축적 중…':'혈중 Asn 흡수에 의존',LC.x,LC.y+LC.r+58);
+ // legend
+ sx.textAlign='left';sx.font='14px Pretendard';const lg=[['#fbbf24','Asn'],['#a78bfa','아스파라기나아제'],['#60a5fa','Asp'],['#a3e635','NH₃']];
+ lg.forEach(([c,n],i)=>{const x=BL.x0+20+i*105-(i>1?0:0);sx.fillStyle=c;sx.beginPath();sx.arc(x,H-22,6,0,7);sx.fill();sx.fillStyle='#cbd5e1';sx.fillText(n,x+11,H-17)});
+ // meters
+ document.getElementById('mAsn').innerHTML=(L*BASE_UM<0.5?'<0.5':(L*BASE_UM).toFixed(1))+' µM <span style="font-size:16px;color:#93a3bd">('+Math.round(L*100)+'%)</span>';document.getElementById('mT').textContent=Math.floor(simH)+' h';document.getElementById('mA').textContent=Math.round(curA)+' mIU/mL';document.getElementById('bAsn').style.width=L*100+'%';
+ document.getElementById('mEr').textContent=Math.round(stress*100)+'%';document.getElementById('bEr').style.width=stress*100+'%';
+ const st=document.getElementById('mState');
+ st.textContent=dead?`백혈병 세포 사멸(${Math.round(deathH)}h) · 정상 세포 생존`:stress>=COMMIT?'사멸 결정 — 비가역 진행':stress>.05?'ER 스트레스 누적 중':(curA>=100?'혈중 Asn 고갈 중':curA>0?'활성 부족(<100 mIU/mL)':'두 세포 모두 정상 증식');
+ st.style.color=dead?'#f43f5e':stress>.05?'#fbbf24':'#e6ecf5';
+}
+function loop(t){if(cur===0)drawMol(t);else if(cur===1)drawSim(t);else lastT=null;requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
