@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>아스파라긴 & 아스파라기나아제</title>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
-<!-- 3Dmol.js 라이브러리 추가 (단백질 3D 렌더링용) -->
+<!-- 3Dmol.js 라이브러리 (단백질 3D 렌더링용) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.0.5/3Dmol-min.js"></script>
 <style>
 :root{--bg:#0b1220;--panel:#111a2e;--line:#22304d;--txt:#e6ecf5;--sub:#93a3bd;--teal:#2dd4bf;--amber:#fbbf24;--red:#f43f5e;--blue:#60a5fa;--violet:#a78bfa}
@@ -29,6 +29,7 @@ h1 em{font-style:normal;background:linear-gradient(90deg,var(--teal),var(--blue)
 .card li{padding-left:20px;position:relative}
 .card li:before{content:"";position:absolute;left:2px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--teal)}
 b{color:#fff}.hl-a{color:var(--amber);font-weight:700}.hl-r{color:var(--red);font-weight:700}.hl-t{color:var(--teal);font-weight:700}.hl-b{color:var(--blue);font-weight:700}
+.cite{font-size:14px;color:var(--sub);font-weight:600;margin-left:4px;vertical-align:super}
 .eq{font-family:'JetBrains Mono',Consolas,monospace;font-size:19px;background:#0a1324;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:12px;color:#dbe7ff;text-align:center}
 .tag{display:inline-block;font-size:16px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub);margin-left:auto;font-weight:500}
 canvas{display:block}
@@ -46,6 +47,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;heigh
 .dose{font-size:26px;font-weight:800;color:var(--violet);width:200px;text-align:right}
 button{font-family:inherit;font-size:18px;padding:10px 18px;border-radius:12px;border:1px solid var(--line);background:#1a2540;color:var(--txt);cursor:pointer}
 button:hover{background:#24335a}
+.pdb-btn{font-size:14px;padding:6px 12px;border-radius:8px;background:rgba(26,37,64,0.85);border:1px solid var(--line);color:var(--sub);transition:all .2s}
+.pdb-btn.active{background:rgba(45,212,191,0.2);border-color:var(--teal);color:#fff;font-weight:700}
 .meters{display:grid;grid-template-columns:1fr 1fr 1fr 1.3fr;gap:16px}
 .meter{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
 .meter .k{font-size:16px;color:var(--sub)}.meter .v{font-size:28px;font-weight:800;margin-top:2px}
@@ -69,14 +72,14 @@ button:hover{background:#24335a}
         <ul>
           <li>단백질을 조립하는 <b>20가지 표준 아미노산</b> 중 하나</li>
           <li>측쇄 끝에 <span class="hl-a">아미드기(–CONH₂)</span>를 가진 극성 아미노산 — 물·다른 분자와 잘 상호작용</li>
-          <li>체내 합성이 가능한 <b>비필수 아미노산</b> → 대부분의 세포는 스스로 만들어 씀</li>
+          <li>체내 합성이 가능한 <b>비필수 아미노산</b> → 대부분의 정상 세포는 스스로 만들어 씀<span class="cite">[1,6]</span></li>
         </ul>
       </div>
       <div class="card">
         <h3><span class="num">2</span>아스파라긴의 생성 — 세포 내 자급자족</h3>
         <ul>
-          <li>세포질의 <span class="hl-t">아스파라긴 합성효소(ASNS)</span>가 ‘생산 공장’ 역할</li>
-          <li>아스파르트산에 글루타민의 아미드 질소를 옮겨 붙여 합성 (ATP 소모)</li>
+          <li>세포질의 <span class="hl-t">아스파라긴 합성효소(ASNS)</span>가 ‘생산 공장’ 역할<span class="cite">[6]</span></li>
+          <li>TCA 회로 유래 아스파르트산에 글루타민의 아미드 질소를 옮겨 붙여 합성 (ATP 소모)<span class="cite">[6]</span></li>
         </ul>
         <div class="eq">아스파르트산 + 글루타민 + ATP &nbsp;<span class="hl-t">—ASNS→</span>&nbsp; 아스파라긴 + 글루탐산 + AMP + PPi</div>
       </div>
@@ -121,26 +124,26 @@ button:hover{background:#24335a}
     <div class="col" style="flex:1">
       <div class="card">
         <h3><span class="num">1</span>종양 세포의 대사적 결함</h3>
-        <p>급성 림프모구 백혈병(ALL) 세포는 <span class="hl-r">ASNS 발현이 매우 낮아</span> 스스로 충분히 만들지 못함 → <b>혈중 아스파라긴 공급에 의존</b>해야만 증식 가능</p>
+        <p>급성 림프모구 백혈병(ALL) 세포는 <span class="hl-r">ASNS 발현이 매우 낮아</span> 스스로 충분히 만들지 못함 → <b>혈중 아스파라긴 공급에 의존</b>해야만 증식 가능<span class="cite">[1,8]</span></p>
       </div>
       <div class="card">
         <h3><span class="num">2</span>효소의 가수분해 작용</h3>
-        <p>투여된 <span class="hl-b">아스파라기나아제(4량체)</span>가 혈중 아스파라긴의 아미드기에 물을 더해 분해</p>
+        <p>투여된 <span class="hl-b">아스파라기나아제(4량체)</span>가 혈중 아스파라긴의 아미드기에 물을 더해 분해<span class="cite">[1,9,12]</span></p>
         <div class="eq">Asn + H₂O <span class="hl-b">—아스파라기나아제→</span> Asp + NH₃</div>
       </div>
       <div class="card">
         <h3><span class="num">3</span>표적 사멸 — 세포사멸 유도</h3>
         <ul>
-          <li>아스파라긴 고갈 → 단백질 합성 정지, 잘못 접히고 <b>당 꼬리표 없는 불량 단백질</b> 축적</li>
-          <li>소포체 스트레스(ER Stress)·UPR 누적 → <span class="hl-r">Apoptosis</span></li>
-          <li>ASNS를 가동하는 <span class="hl-t">정상 세포는 생존</span></li>
+          <li>아스파라긴 고갈 → 단백질 합성 정지, 잘못 접히고 <b>당 꼬리표 없는 불량 단백질</b> 축적<span class="cite">[1,12]</span></li>
+          <li>소포체 스트레스(ER Stress)·UPR 및 Ca²⁺-ROS 경로 누적 → <span class="hl-r">Apoptosis</span><span class="cite">[7]</span></li>
+          <li>GCN2–ATF4 경로로 ASNS를 유도하는 <span class="hl-t">정상 세포는 생존</span><span class="cite">[6]</span></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SLIDE 3 (NEW & REFINED) ============ -->
+<!-- ============ SLIDE 3 (REFINED & VERIFIED) ============ -->
 <section class="slide">
   <div class="eyebrow">PART 3 · 치료 극대화와 부작용 최소화</div>
   <h1>아스파라기나아제의 <em>임상적 활용과 최신 지침</em></h1>
@@ -151,17 +154,17 @@ button:hover{background:#24335a}
     <div class="col" style="flex: 1.2; justify-content: space-between;">
       <div class="card" style="padding: 24px;">
         <h3 style="font-size: 24px;"><span class="num">1</span>ALL 치료의 골드 스탠다드</h3>
-        <p style="font-size: 19px;">소아·청소년 <b>급성 림프모구 백혈병(ALL)</b>의 표준 항암제로, 최근 청년층(AYA) 및 성인 환자 프로토콜에도 적극 도입되어 생존율을 획기적으로 개선하고 있습니다.</p>
+        <p style="font-size: 19px;">소아·청소년 <b>급성 림프모구 백혈병(ALL)</b>의 핵심 표준 항암제로<span class="cite">[9,10]</span>, 최근 청년층(AYA) 및 성인 환자 프로토콜에도 적극 도입되어 생존율을 획기적으로 개선하고 있습니다<span class="cite">[11,12]</span>.</p>
       </div>
       
       <div class="card" style="padding: 24px;">
         <h3 style="font-size: 24px;"><span class="num">2</span>과민반응 극복: ERW 약물 교체</h3>
-        <p style="font-size: 19px;">대장균(E. coli) 유래 효소 투여 중 <span class="hl-r">과민반응</span> 발생 시, 면역 교차 반응이 없는 <b>에르위니아(Erwinia) 유래 효소로 즉시 교체</b>하여 아스파라긴 고갈을 유지합니다.</p>
+        <p style="font-size: 19px;">대장균(E. coli) 유래 효소 투여 중 항체 형성에 의한 <span class="hl-r">과민반응·무증상 불활성화</span> 발생 시, 면역 교차 반응이 없는 <b>에르위니아(Erwinia) 유래 효소로 즉시 교체</b>하여 아스파라긴 고갈을 유지합니다<span class="cite">[1,5,9]</span>.</p>
         
-        <!-- 시각적 도식화 (축소 및 정렬) -->
+        <!-- 시각적 도식화 -->
         <div style="display:flex;align-items:center;gap:12px;margin-top:16px;">
           <div style="flex:1;background:rgba(244,63,94,0.1);border:1px solid var(--red);border-radius:10px;padding:12px;text-align:center;">
-            <div style="color:var(--red);font-weight:bold;font-size:18px;">E. coli 유래</div>
+            <div style="color:var(--red);font-weight:bold;font-size:18px;">E. coli 유래 (PEG)</div>
             <div style="font-size:15px;color:#cdd6e4;margin-top:4px;">알레르기 / 활성 소실</div>
           </div>
           <div style="font-size:24px;font-weight:bold;color:var(--sub)">➔</div>
@@ -174,18 +177,18 @@ button:hover{background:#24335a}
       
       <div class="card" style="padding: 24px;">
         <h3 style="font-size: 24px;"><span class="num">3</span>특이적 부작용 및 임상 관리</h3>
-        <p style="font-size: 19px;">정상 단백질 합성 둔화로 <span class="hl-a">간 기능 장애 및 췌장염</span>이 유발될 수 있습니다. 응고 인자 감소로 인한 <span class="hl-r">혈전증</span> 등 예방적 모니터링이 필수입니다.</p>
+        <p style="font-size: 19px;">정상 장기의 단백질 합성 둔화로 <span class="hl-a">간 기능 장애 및 췌장염</span>이 유발될 수 있으며, 응고 인자·알부민 합성 감소로 인한 <span class="hl-r">혈전증, 저알부민혈증</span> 위험이 있어 철저한 예방적 모니터링이 필수입니다<span class="cite">[9,10,12]</span>.</p>
       </div>
     </div>
     
     <!-- 오른쪽 단: TDM 차트 및 단백질 3D 뷰어 -->
     <div class="col" style="flex: 1.1; justify-content: flex-start;">
       <div class="card" style="padding: 24px;">
-        <h3 style="font-size: 24px;"><span class="num">4</span>정밀 의료: 치료 약물 모니터링</h3>
-        <p style="font-size: 19px;">환자별 약물 대사 속도를 고려해 다음 투여 직전 최저 활성도 <span class="hl-t">NSAA</span>를 측정, 개별 용량을 조절합니다.</p>
+        <h3 style="font-size: 24px;"><span class="num">4</span>정밀 의료: 치료 약물 모니터링 (TDM)</h3>
+        <p style="font-size: 19px;">환자별 약동학적 차이와 무증상 불활성화를 확인하기 위해 다음 투여 직전 최저 활성도 <span class="hl-t">NSAA</span>를 측정하여 개별 용량을 조절합니다<span class="cite">[1,2,11]</span>.</p>
         <div style="margin-top:20px;">
           <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:16px;font-weight:bold;">
-            <span>NSAA 목표 최저치</span><span style="color:var(--teal)">≥ 100 mIU/mL</span>
+            <span>NSAA 목표 최저치 (Trough Level)</span><span style="color:var(--teal)">≥ 100 mIU/mL (0.1 IU/mL)</span>
           </div>
           <div style="height:12px;border-radius:6px;background:linear-gradient(90deg, #1f2a44 0%, var(--teal) 50%, var(--blue) 100%);position:relative;">
             <div style="position:absolute;left:50%;top:-5px;width:3px;height:22px;background:#fff;border-radius:2px;box-shadow:0 0 8px rgba(255,255,255,0.6);"></div>
@@ -193,25 +196,26 @@ button:hover{background:#24335a}
         </div>
       </div>
       
-      <!-- 3Dmol.js 효소 3D 렌더링 영역 -->
+      <!-- 3Dmol.js 효소 3D 렌더링 영역 (버그 수정 및 4량체/인간 효소 비교 지원) -->
       <div class="card" style="flex: 1; padding: 0; overflow: hidden; border: 1px solid var(--teal); background: #05080f; position: relative;">
-        <!-- 라벨 헤더 -->
-        <div style="position:absolute; top:20px; left:24px; z-index:10; background: rgba(11, 18, 32, 0.7); padding: 8px 16px; border-radius: 12px; border: 1px solid rgba(45, 212, 191, 0.3); backdrop-filter: blur(4px);">
-            <h3 style="font-size: 20px; margin: 0; color: var(--teal); display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 24px;">🧬</span> 효소 입체 구조
+        <!-- 라벨 헤더 및 구조 전환 버튼 -->
+        <div style="position:absolute; top:16px; left:20px; right:20px; z-index:10; display:flex; justify-content:space-between; align-items:center; pointer-events:none;">
+          <div style="background: rgba(11, 18, 32, 0.85); padding: 8px 14px; border-radius: 12px; border: 1px solid rgba(45, 212, 191, 0.35); backdrop-filter: blur(4px);">
+            <h3 id="pdbTitle" style="font-size: 18px; margin: 0; color: var(--teal); display: flex; align-items: center; gap: 8px;">
+              <span>🧬</span> E. coli 임상 치료제 4량체 (PDB: 3ECA · UniProt: P00805)
             </h3>
+          </div>
+          <div style="display:flex; gap:6px; pointer-events:auto;">
+            <button class="pdb-btn active" onclick="loadEnzyme('3ECA','E. coli 임상 치료제 4량체 (PDB: 3ECA · UniProt: P00805)',this)">E. coli (3ECA)</button>
+            <button class="pdb-btn" onclick="loadEnzyme('5F52','Erwinia 대체 치료제 4량체 (PDB: 5F52 · UniProt: P06608)',this)">Erwinia (5F52)</button>
+            <button class="pdb-btn" onclick="loadEnzyme('4O0H','인간 유사효소 2량체 (PDB: 4O0H · UniProt: Q7L266)',this)">Human (Q7L266)</button>
+          </div>
         </div>
-        <!-- 3Dmol 뷰어 컨테이너 (자동 로드) -->
-        <div style="width: 100%; height: 100%; position: absolute; inset: 0;"
-             class="viewer_3Dmoljs"
-             data-pdb="4O0H"
-             data-backgroundcolor="#05080f"
-             data-style="cartoon:color=spectrum"
-             data-spin="axis:y;speed:0.1">
-        </div>
+        <!-- 3Dmol 뷰어 컨테이너 -->
+        <div id="enz3d" style="width: 100%; height: 100%; position: absolute; inset: 0;"></div>
         <!-- 조작 힌트 -->
-        <div style="position:absolute; bottom:16px; left:0; right:0; text-align: center; z-index:10; font-size: 15px; font-weight: bold; color: rgba(255,255,255,0.6); text-shadow: 0 2px 4px #000;">
-            마우스 드래그: 회전 · 휠: 확대/축소
+        <div style="position:absolute; bottom:14px; left:0; right:0; text-align: center; z-index:10; font-size: 14px; font-weight: bold; color: rgba(255,255,255,0.65); text-shadow: 0 2px 4px #000; pointer-events:none;">
+          마우스 드래그: 회전 · 휠: 확대/축소 · 우측 상단 버튼으로 임상 4량체(3ECA/5F52) 및 인간 효소(Q7L266) 비교
         </div>
       </div>
     </div>
@@ -222,43 +226,43 @@ button:hover{background:#24335a}
 <section class="slide">
   <div class="eyebrow">APPENDIX · 시뮬레이션 모델 및 임상 지침 과학적 근거</div>
   <h1>시뮬레이션 및 임상 <em>출처</em></h1>
-  <div class="lead">화면 1초 = 실제 2시간. 아래 수치는 문헌 값이고, 그 사이 값은 모델링을 위한 가정입니다.</div>
+  <div class="lead">화면 1초 = 실제 2시간. 아래 수치는 문헌 값이고, 그 사이 값은 모델링을 위한 가정(†)입니다.</div>
   <div class="body" style="gap:40px">
-    <div class="col" style="flex:1">
-      <div class="card" style="padding:18px 24px"><table style="width:100%;border-collapse:collapse;font-size:18px;line-height:1.45">
-        <tr style="color:var(--teal);text-align:left"><th style="padding:6px">항목</th><th>모델 값</th><th>근거</th></tr>
-        <tr><td style="padding:6px">기저 혈중 Asn</td><td>50 µM</td><td>정상 범위 40–80 µM [4]</td></tr>
-        <tr><td style="padding:6px">완전 고갈 기준</td><td>≥100 mIU/mL</td><td>국제 표준 역치 [1][2][11]</td></tr>
-        <tr><td style="padding:6px">반등 시작</td><td>&lt;400 mIU/mL</td><td>AALL07P4 약력학 [3]</td></tr>
-        <tr><td style="padding:6px">고갈 속도</td><td>τ≈2h (수 시간 내)</td><td>투여 후 급격히 정량한계 이하 감소 [3][5]</td></tr>
-        <tr><td style="padding:6px">정상 세포 유도</td><td>τ≈8h</td><td>ATF4 30분 내 개시, 4–24h 전사 [6]</td></tr>
-        <tr><td style="padding:6px">사멸 결정 시점</td><td>완전 고갈 후 ~18h</td><td>12h 처리 후 Annexin V 양성 증가 [7]</td></tr>
-        <tr><td style="padding:6px">세포 붕괴</td><td>~36h</td><td>in vitro 세포독성 24–72h 평가 [8]</td></tr>
+    <div class="col" style="flex:0.95">
+      <div class="card" style="padding:18px 24px"><table style="width:100%;border-collapse:collapse;font-size:17.5px;line-height:1.45">
+        <tr style="color:var(--teal);text-align:left"><th style="padding:6px">항목</th><th>모델 값</th><th>근거 및 원문 위치</th></tr>
+        <tr><td style="padding:6px">기저 혈중 Asn</td><td>50 µM</td><td>정상 범위 40–80 µM [1 (p.2274), 4 (Ch.1)]</td></tr>
+        <tr><td style="padding:6px">완전 고갈 기준</td><td>≥100 mIU/mL</td><td>국제 표준 역치 0.1 IU/mL [1, 2 (p.3), 11]</td></tr>
+        <tr><td style="padding:6px">반등 시작</td><td>&lt;400 mIU/mL</td><td>AALL07P4 약력학 [3 (p.3877–3878)]</td></tr>
+        <tr><td style="padding:6px">고갈 속도</td><td>τ≈2h (수 시간 내)</td><td>투여 직후 정량한계 이하 급감 [3, 5] †τ값</td></tr>
+        <tr><td style="padding:6px">정상 세포 유도</td><td>τ≈8h</td><td>ATF4 개시 후 4–24h 전사 유지 [6 (p.641–643)]</td></tr>
+        <tr><td style="padding:6px">사멸 결정 시점</td><td>완전 고갈 후 ~18h</td><td>12h 처리 후 Annexin V 양성 증가 [7 (Fig.6)] †</td></tr>
+        <tr><td style="padding:6px">세포 붕괴</td><td>~36h</td><td>in vitro 세포독성 24–72h 평가 [8 (p.658)] †</td></tr>
         <tr><td style="padding:6px">ER 스트레스 지수</td><td>0–1 (결정점 0.5)</td><td>† 개념 지표 (실측 단위 없음)</td></tr>
       </table></div>
-      <div class="card" style="padding:16px 24px"><p style="font-size:16px">⏳ 반감기 모드: ‘💉 투여’ 시 슬라이더 값을 최고 활성으로 더하고, A(t)=A₀·e<sup>−ln2·t/t½</sup>로 1차 소실 (PEG형 t½≈5.7일, Erwinia형 ≈15.6h [1]). 흡수 지연·항체에 의한 불활성화(silent inactivation)는 미반영. 실제 사멸에는 병용 항암제·글루타민 분해 등 다른 요인도 관여함.</p></div>
+      <div class="card" style="padding:16px 24px"><p style="font-size:15.5px">⏳ 반감기 모드: ‘💉 투여’ 시 슬라이더 값을 최고 활성으로 더하고, A(t)=A₀·e<sup>−ln2·t/t½</sup>로 1차 소실 (PEG형 t½≈5.73일, Erwinia형 ≈15.6h [1 (Table II), 9 (Table 1)]). 흡수 지연·항체에 의한 불활성화(silent inactivation)는 미반영. 실제 사멸에는 병용 항암제·글루타민 분해 등 다른 요인도 관여함.</p></div>
     </div>
-    <div class="col" style="flex:1.2">
-      <div class="card" style="padding:24px 28px; height:100%;">
-        <h3 style="font-size:24px; margin-bottom:16px;">참고문헌</h3>
+    <div class="col" style="flex:1.25">
+      <div class="card" style="padding:22px 26px; height:100%;">
+        <h3 style="font-size:23px; margin-bottom:14px;">참고문헌 (References)</h3>
         
-        <!-- 출처 2단(Grid) 레이아웃 -->
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-          <ol style="font-size:15px;line-height:1.5;color:#cdd6e4;padding-left:18px;display:flex;flex-direction:column;gap:12px;margin:0;">
-            <li>Asselin B, Rizzari C. Asparaginase pharmacokinetics and implications of TDM. <i>Leuk Lymphoma</i> 2015.</li>
-            <li>ANZCHOG. Serum asparaginase activity monitoring in children and adolescents (Guideline), 2024.</li>
-            <li>Angiolillo AL et al. PK/PD of calaspargase pegol in ALL. <i>J Clin Oncol</i> 2014.</li>
-            <li>Tong WH. 박사학위논문, Erasmus University Rotterdam.</li>
-            <li>Maese L et al. Recombinant Erwinia asparaginase (JZP458) in ALL. <i>Blood</i> 2023.</li>
-            <li>Richards NGJ. Asparagine synthetase chemotherapy. <i>Annu Rev Biochem</i> 2006.</li>
+        <!-- 출처 2단(Grid) 레이아웃 (서지 정보 완결성 보완 완료) -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 22px;">
+          <ol style="font-size:14.5px;line-height:1.48;color:#cdd6e4;padding-left:18px;display:flex;flex-direction:column;gap:10px;margin:0;">
+            <li>Asselin B, Rizzari C. Asparaginase pharmacokinetics and implications of therapeutic drug monitoring. <i>Leuk Lymphoma</i> 2015;56(8):2273–2280. (PMC4732456)</li>
+            <li>O'Connor M et al. (ANZCHOG). <i>Serum asparaginase activity monitoring in children and adolescents (Guideline)</i>, August 2024.</li>
+            <li>Angiolillo AL et al. PK and PD properties of calaspargase pegol in ALL: COG AALL07P4. <i>J Clin Oncol</i> 2014;32(34):3874–3882. (PMC4239306)</li>
+            <li>Tong WH. <i>Efficacy and Toxicity of Asparaginases During Prospective Drug Monitoring in Childhood ALL</i>. PhD Thesis, Erasmus Univ. Rotterdam, 2014.</li>
+            <li>Maese L et al. Recombinant Erwinia asparaginase (JZP458) in ALL: results from AALL1931. <i>Blood</i> 2023;141(7):704–712. (PMC10651770)</li>
+            <li>Richards NGJ, Kilberg MS. Asparagine synthetase chemotherapy. <i>Annu Rev Biochem</i> 2006;75:629–654. (PMC3587692)</li>
           </ol>
-          <ol start="7" style="font-size:15px;line-height:1.5;color:#cdd6e4;padding-left:18px;display:flex;flex-direction:column;gap:12px;margin:0;">
-            <li>Requirement for ER–mitochondria Ca²⁺ transfer... in L-asparaginase-induced apoptosis. <i>Front Cell Dev Biol</i> 2023.</li>
-            <li>Hermanova I et al. Low expression of asparagine synthetase in lymphoid blasts. <i>Exp Hematol</i> 2012.</li>
-            <li><span class="hl-t">[신규]</span> Current Use of Asparaginase in Acute Lymphoblastic Leukemia/Lymphoblastic Lymphoma. <i>PMC9279693</i> 2022.</li>
-            <li><span class="hl-t">[신규]</span> Asparaginase therapy in ALL: expert opinion on use and toxicity management. <i>TandF</i> 2023.</li>
-            <li><span class="hl-t">[신규]</span> Frontline management of ALL in AYA. <i>Hematology/ASH Guidelines</i> 2024.</li>
-            <li><span class="hl-t">[신규]</span> Asparaginase in the Treatment of ALL in Adults: Current Evidence. <i>PMC9166408</i> 2022.</li>
+          <ol start="7" style="font-size:14.5px;line-height:1.48;color:#cdd6e4;padding-left:18px;display:flex;flex-direction:column;gap:10px;margin:0;">
+            <li>Lee JK, Rosales JL, Lee KY. Requirement for ER–mitochondria Ca²⁺ transfer, ROS production and mPTP formation in L-asparaginase-induced apoptosis of ALL cells. <i>Front Cell Dev Biol</i> 2023;11:1124164.</li>
+            <li>Hermanova I et al. Low expression of asparagine synthetase in lymphoid blasts precludes its role in sensitivity to L-asparaginase. <i>Exp Hematol</i> 2012;40(8):657–665.</li>
+            <li>Maese L, Rau RE. Current Use of Asparaginase in ALL/LBL. <i>Front Pediatr</i> 2022;10:902117 (PMC9279693); &amp; Tosta Pérez M et al. <i>Med Oncol</i> 2023;40(5):150 (PMID:37060469).</li>
+            <li>Sandley M, Angus J. Asparaginase therapy in patients with ALL: expert opinion on use and toxicity management. <i>Leuk Lymphoma</i> 2023;64(4):776–787.</li>
+            <li>ASH Guidelines on ALL in AYA Frontline Management, 2024; &amp; Kloos RQH et al. Individualized asparaginase dosing in childhood ALL. <i>J Clin Oncol</i> 2020;38(7):715–724.</li>
+            <li>Juluri KR, Siu C, Cassaday RD. Asparaginase in the Treatment of ALL in Adults: Current Evidence and Place in Therapy. <i>Blood Lymphat Cancer</i> 2022;12:55–79. (PMC9166408)</li>
           </ol>
         </div>
       </div>
@@ -276,7 +280,6 @@ const stage=document.getElementById('stage');
 function fit(){
  const de=document.documentElement;
  const w=de.clientWidth||innerWidth, hRaw=de.clientHeight||innerHeight;
- // 높이가 너무 작게 잡히는 임베드(자동 높이 iframe 등)는 너비 기준으로 맞춤
  const h=(hRaw<200)?w*9/16:hRaw;
  const sc=Math.min(w/1920,h/1080);
  const ox=(w-1920*sc)/2, oy=Math.max(0,(h-1080*sc)/2);
@@ -286,8 +289,42 @@ function fit(){
 addEventListener('resize',fit);addEventListener('load',fit);addEventListener('orientationchange',fit);
 if(window.ResizeObserver)new ResizeObserver(fit).observe(document.documentElement);
 fit();setTimeout(fit,300);
+
+/* ---------- Slide 3: 3Dmol.js Viewer (지연 초기화 및 크기 보정) ---------- */
+let enzViewer=null, curPdb='3ECA';
+function ensureEnzViewer(){
+ const el=document.getElementById('enz3d');
+ if(!el||typeof $3Dmol==='undefined')return;
+ if(!enzViewer){
+  enzViewer=$3Dmol.createViewer(el,{backgroundColor:'#05080f'});
+  loadEnzyme('3ECA','E. coli 임상 치료제 4량체 (PDB: 3ECA · UniProt: P00805)',document.querySelector('.pdb-btn'));
+ } else {
+  enzViewer.resize();
+  enzViewer.render();
+ }
+}
+function loadEnzyme(pdb,title,btn){
+ if(btn){document.querySelectorAll('.pdb-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+ const tEl=document.getElementById('pdbTitle');
+ if(tEl)tEl.innerHTML=`<span>🧬</span> ${title}`;
+ if(!enzViewer)return;
+ curPdb=pdb;
+ enzViewer.clear();
+ $3Dmol.download('pdb:'+pdb,enzViewer,{},function(){
+  enzViewer.setStyle({},{cartoon:{color:'spectrum'}});
+  enzViewer.zoomTo();
+  enzViewer.spin('y',0.4);
+  enzViewer.render();
+ });
+}
+
 const slides=[...document.querySelectorAll('.slide')];let cur=0;
-function go(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,k)=>s.classList.toggle('active',k===cur));document.getElementById('pg').textContent=`${cur+1} / ${slides.length}`}
+function go(i){
+ cur=Math.max(0,Math.min(slides.length-1,i));
+ slides.forEach((s,k)=>s.classList.toggle('active',k===cur));
+ document.getElementById('pg').textContent=`${cur+1} / ${slides.length}`;
+ if(cur===2)setTimeout(ensureEnzViewer,60);
+}
 document.getElementById('prev').onclick=()=>go(cur-1);document.getElementById('next').onclick=()=>go(cur+1);
 addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1)});
 
