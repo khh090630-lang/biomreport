@@ -196,7 +196,7 @@ button:hover{background:#24335a}
         </div>
       </div>
       
-      <!-- 3Dmol.js 효소 3D 렌더링 영역 (버그 수정 및 4량체/인간 효소 비교 지원) -->
+      <!-- 3Dmol.js 효소 3D 렌더링 영역 -->
       <div class="card" style="flex: 1; padding: 0; overflow: hidden; border: 1px solid var(--teal); background: #05080f; position: relative;">
         <!-- 라벨 헤더 및 구조 전환 버튼 -->
         <div style="position:absolute; top:16px; left:20px; right:20px; z-index:10; display:flex; justify-content:space-between; align-items:center; pointer-events:none;">
@@ -222,17 +222,16 @@ button:hover{background:#24335a}
   </div>
 </section>
 
-<!-- ============ SLIDE 4 (출처 잘림 문제 수정) ============ -->
+<!-- ============ SLIDE 4 (출처 박스 넘침 해결) ============ -->
 <section class="slide">
   <div class="eyebrow">APPENDIX · 시뮬레이션 모델 및 임상 지침 과학적 근거</div>
   <h1>시뮬레이션 및 임상 <em>출처</em></h1>
   <div class="lead">화면 1초 = 실제 2시간. 아래 수치는 문헌 값이고, 그 사이 값은 모델링을 위한 가정(†)입니다.</div>
   
-  <!-- 전체적인 gap을 24px로 줄여 공간 확보 -->
   <div class="body" style="gap:24px">
     
+    <!-- 왼쪽 단 (시뮬레이션 근거 표) -->
     <div class="col" style="flex:1">
-      <!-- 표 내부 패딩 및 글자 크기 미세 조정 -->
       <div class="card" style="padding:14px 20px"><table style="width:100%;border-collapse:collapse;font-size:16.5px;line-height:1.4">
         <tr style="color:var(--teal);text-align:left"><th style="padding:4px">항목</th><th>모델 값</th><th>근거 및 원문 위치</th></tr>
         <tr><td style="padding:4px">기저 혈중 Asn</td><td>50 µM</td><td>정상 범위 40–80 µM [1 (p.2274), 4 (Ch.1)]</td></tr>
@@ -245,18 +244,17 @@ button:hover{background:#24335a}
         <tr><td style="padding:4px">ER 스트레스 지수</td><td>0–1 (결정점 0.5)</td><td>† 개념 지표 (실측 단위 없음)</td></tr>
       </table></div>
       
-      <!-- 설명문 카드 크기 조정 -->
       <div class="card" style="padding:14px 20px"><p style="font-size:14.5px; line-height: 1.5;">⏳ 반감기 모드: ‘💉 투여’ 시 슬라이더 값을 최고 활성으로 더하고, A(t)=A₀·e<sup>−ln2·t/t½</sup>로 1차 소실 (PEG형 t½≈5.73일, Erwinia형 ≈15.6h [1 (Table II), 9 (Table 1)]). 흡수 지연·항체에 의한 불활성화(silent inactivation)는 미반영. 실제 사멸에는 병용 항암제·글루타민 분해 등 다른 요인도 관여함.</p></div>
     </div>
     
-    <div class="col" style="flex:1.35">
-      <!-- 우측 참고문헌 리스트를 감싸는 카드의 패딩을 줄여 내부 공간 확보 -->
-      <div class="card" style="padding:16px 22px; height:100%;">
-        <h3 style="font-size:22px; margin-bottom:10px;">참고문헌 (References)</h3>
+    <!-- 오른쪽 단 (참고문헌 리스트 - 박스 넘침 해결 영역) -->
+    <div class="col" style="flex:1.45">
+      <div class="card" style="padding:14px 18px; height:100%;">
+        <h3 style="font-size:20px; margin-bottom:8px;">참고문헌 (References)</h3>
         
-        <!-- 그리드 간격 축소 및 폰트 사이즈/행간 조절로 오버플로우 방지 -->
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <ol style="font-size:13.5px;line-height:1.45;color:#cdd6e4;padding-left:18px;display:flex;flex-direction:column;gap:8px;margin:0;">
+        <!-- 그리드 간격 축소, 폰트 사이즈 미세 축소, 행간 조절 -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <ol style="font-size:12.5px;line-height:1.4;color:#cdd6e4;padding-left:18px;display:flex;flex-direction:column;gap:6px;margin:0;">
             <li>Asselin B, Rizzari C. Asparaginase pharmacokinetics and implications of therapeutic drug monitoring. <i>Leuk Lymphoma</i> 2015;56(8):2273–2280. (PMC4732456)</li>
             <li>O'Connor M et al. (ANZCHOG). <i>Serum asparaginase activity monitoring in children and adolescents (Guideline)</i>, August 2024.</li>
             <li>Angiolillo AL et al. PK and PD properties of calaspargase pegol in ALL: COG AALL07P4. <i>J Clin Oncol</i> 2014;32(34):3874–3882. (PMC4239306)</li>
@@ -264,7 +262,7 @@ button:hover{background:#24335a}
             <li>Maese L et al. Recombinant Erwinia asparaginase (JZP458) in ALL: results from AALL1931. <i>Blood</i> 2023;141(7):704–712. (PMC10651770)</li>
             <li>Richards NGJ, Kilberg MS. Asparagine synthetase chemotherapy. <i>Annu Rev Biochem</i> 2006;75:629–654. (PMC3587692)</li>
           </ol>
-          <ol start="7" style="font-size:13.5px;line-height:1.45;color:#cdd6e4;padding-left:18px;display:flex;flex-direction:column;gap:8px;margin:0;">
+          <ol start="7" style="font-size:12.5px;line-height:1.4;color:#cdd6e4;padding-left:18px;display:flex;flex-direction:column;gap:6px;margin:0;">
             <li>Lee JK, Rosales JL, Lee KY. Requirement for ER–mitochondria Ca²⁺ transfer, ROS production and mPTP formation in L-asparaginase-induced apoptosis of ALL cells. <i>Front Cell Dev Biol</i> 2023;11:1124164.</li>
             <li>Hermanova I et al. Low expression of asparagine synthetase in lymphoid blasts precludes its role in sensitivity to L-asparaginase. <i>Exp Hematol</i> 2012;40(8):657–665.</li>
             <li>Maese L, Rau RE. Current Use of Asparaginase in ALL/LBL. <i>Front Pediatr</i> 2022;10:902117 (PMC9279693); &amp; Tosta Pérez M et al. <i>Med Oncol</i> 2023;40(5):150 (PMID:37060469).</li>
